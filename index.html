@@ -1,0 +1,60 @@
+<doctype HTML>
+<head>
+  <style>
+  #bezier {
+    height:500px;
+    width:500px;
+    background:#000;
+  }
+
+  .bezierDot {
+    background:#fff;
+    width:2px;
+    height:2px;
+    position:absolute;
+  }
+  </style>
+</head>
+<body>
+  <div id="bezier">
+
+  </div>
+<script>
+var div = document.getElementById('bezier')
+
+function drawDot(x,y) {
+	let dot = document.createElement('div')
+  dot.setAttribute("class", "bezierDot")
+  dot.style.top = x + "px"
+  dot.style.left = y + "px"
+  div.appendChild(dot)
+
+}
+
+function bezierPoint(p1,p2,t) {
+	let diff = p2-p1
+  return point = p1 + (diff * t)
+}
+
+function bezier(xa,ya,xb,yb,xc,yc) {
+  for (var t = 0; t < 1; t+= .01) {
+  	let x1 = bezierPoint(xa,xb,t)
+    let y1 = bezierPoint(ya,yb,t)
+    let x2 = bezierPoint(xb,xc,t)
+    let y2 = bezierPoint(yb,yc,t)
+
+    let x = bezierPoint(x1,x2,t)
+    let y = bezierPoint(y1,y2,t)
+
+    drawDot(x,y)
+  }
+}
+
+var randomX = Math.floor(Math.random() * Math.floor(250));
+var randomY = Math.floor(Math.random() * Math.floor(500));
+
+bezier(490,250,randomX,randomY,250,250)
+</script>
+</body>
+
+</doctype>
